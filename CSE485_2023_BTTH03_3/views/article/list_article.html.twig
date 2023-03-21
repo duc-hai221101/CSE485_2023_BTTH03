@@ -1,0 +1,71 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block content %}
+        <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
+        <div class="row">
+            <div class="col-sm">
+                <a href="index.php?controller=article&action=add" class="btn btn-success">Thêm mới</a>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tiêu đề</th>
+                            <th scope="col">Tên bài hát</th>
+                            <th scope="col">Tên thể loại</th>
+                            <th scope="col">Tóm tắt</th>
+                            <th scope="col">Nội dung</th>
+                            <th scope="col">Tác giả</th>
+                            <th scope="col">Ngày viết</th>
+                            <th scope="col">hình ảnh</th>
+                            <th>Sửa</th>
+                            <th>Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                  	{% set count = 0 %}
+					{% for article in articles %}
+						{% set count = count + 1 %}
+                            <tr>
+                                <th scope="row">
+                                    {{count}}
+                                </th>
+                                <td>
+                                    {{article.tieude}}
+                                </td>
+                                <td>
+                                    {{article.ten_bhat}}
+                                </td>
+                                <td>
+                                    {{article.ten_tloai}}
+                                </td>
+                                <td>
+                                    {{article.tomtat}}
+                                </td>
+                                <td>
+                                    {{article.noidung}}
+                                </td>
+                                <td>
+                                    {{article.tacgia}}
+                                </td>
+                                <td>
+                                    {{article.ngayviet}}
+                                </td>
+
+                                <td>
+
+                                    <img style="width: 100px;" src="/CSE485_2023_BTTH03_test/views/images/songs/{{article.hinhanh}}">
+                                </td>
+                                <td>
+                                    <a href="index.php?controller=article&action=edit&id={{article.ma_bviet}}"><i class="fa-solid fa-pen-to-square"></i></a>
+                                </td>
+                                <td>
+                                    <a onclick="return confirm('Bạn có muốn xóa không');" href="/CSE485_2023_BTTH03_test/index.php?controller=article&action=delete&id={{article.ma_bviet}}"><i class="fa-solid fa-trash"></i></a>
+                                </td>
+                            </tr>
+                    		{% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+{% endblock %}

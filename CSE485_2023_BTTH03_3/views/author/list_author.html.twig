@@ -1,0 +1,49 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block content %}
+	<!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
+	<div class="row">
+		<div class="col-sm">
+			<a href="index.php?controller=author&action=add" class="btn btn-success">Thêm mới</a>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Tên tác giả</th>
+						<th scope="col">Hình tác giả</th>
+						<th>Sửa</th>
+						<th>Xóa</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% set count = 0 %}
+					{% for author in authors %}
+						{% set count = count + 1 %}
+						<tr>
+							<th scope="row">
+								{{count}}
+							</th>
+							<td>
+								{{author.ten_tgia}}
+							</td>
+							<td>
+								<img style="width: 100px;" src="/CSE485_2023_BTTH03_test/views/images/authors/{{author.hinh_tgia}}">
+							</td>
+							<td>
+								<a href="index.php?controller=author&action=edit&id={{author.ma_tgia}}">
+									<i class="fa-solid fa-pen-to-square"></i>
+								</a>
+							</td>
+							<td>
+								<a onclick="return confirm('Ban co muon xoa khong');" href="/CSE485_2023_BTTH03_test/index.php?controller=author&action=delete&id={{author.ma_tgia}}">
+									<i class="fa-solid fa-trash"></i>
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}

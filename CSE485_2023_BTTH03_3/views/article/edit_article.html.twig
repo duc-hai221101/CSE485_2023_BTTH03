@@ -1,0 +1,72 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block content %}
+	<!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
+	<div class="row">
+		<div class="col-sm">
+			<h3 class="text-center text-uppercase fw-bold">Sửa thông tin bài viết</h3>
+			{% for article in findArticle %}
+				<form action="index.php?controller=article&action=edit&id={{article.ma_bviet}}" method="post" enctype="multipart/form-data">
+					<div class="form-group mt-3">
+						<label>Mã bài viết</label>
+						<input type="text" class="form-control" name="ma_bviet" readonly value="{{article.ma_bviet}}">
+					</div>
+					<div class="form-group mt-3">
+						<label>Tiêu đề</label>
+						<input type="text" class="form-control" name="tieude" value="{{article.tieude}}">
+					</div>
+
+					<div class="form-group mt-3">
+						<label>Tên bài hát</label>
+						<input type="text" class="form-control" name="ten_bhat" value="{{article.ten_bhat}}">
+					</div>
+
+					<div class="form-group mt-3">
+						<label>Tên thể loại</label>
+						<select class="form-select" aria-label="Default select example" name="ma_tloai" value="<?= $ma_tloai ?>">
+							{% for category in categorys %}
+								<option value='{{category.ma_tloai}}'>{{category.ten_tloai }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="form-group mt-3">
+						<label>Tóm tắt</label>
+						<input type="text" class="form-control" name="tomtat" value="{{article.tomtat}}">
+					</div>
+
+					<div class="form-group mt-3">
+						<label>Nội dung</label>
+						<input type="text" class="form-control" name="noidung" value="{{article.noidung}}">
+					</div>
+
+					<div class="form-group mt-3">
+						<label>Tác giả</label>
+						<select class="form-select" aria-label="Default select example" id="ten_tgia" name="ma_tgia" value="<?= $ma_tgia ?>">
+							{% for author in authors %}
+								<option value='{{author.ma_tgia}}'>{{author.ten_tgia }}</option>
+							{% endfor %}
+
+						</select>
+					</div>
+
+					<div class="form-group mt-3">
+						<label>Ngày viết</label>
+						<input type="date" class="form-control" name="ngayviet" value="{{ article.ngayviet|date('Y-m-d') }}">
+					</div>
+
+					<div class="form-group mt-3">
+						<label>Hình ảnh</label>
+						<img style="width: 100px;" src="/CSE485_2023_BTTH03_test/views/images/songs/{{article.hinhanh}}">
+						<input type="file" class="form-control" name="hinhanh">
+					</div>
+
+				{% endfor %}
+
+				<div class="form-group  float-end mt-3">
+					<input type="submit" name="submit" value="Lưu lại" class="btn btn-success">
+					<a href="index.php?controller=article&action=list" class="btn btn-warning ">Quay lại</a>
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock %}

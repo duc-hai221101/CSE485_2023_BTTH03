@@ -1,0 +1,167 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-sm">
+			<h3 class="text-center text-uppercase fw-bold">Sửa thông tin tác giả</h3>
+			{% for user in findUser %}
+				<form action="index.php?controller=user&action=edit&id={{user.id}}" method="post">
+
+                    <div class="input-group">
+                        <span class="input-group-text" style="width:140px;">ID</span>
+                        <input readonly type="text" name="txtID" class="form-control" value={{user.id}}>
+                    </div>
+                    <div class="input-group mb-3 ">
+
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-text" style="width:140px;">Full Name</span>
+                        <input type="text" name="txtName" class="form-control" required placeholder="Nhập tên " id="txtName" value={{user.name}}>
+                    </div>
+
+                    <div class="input-group mb-3 ">
+                        <span class="text" style="color:red ;margin-left:140px;font-weight:12px;" id="errorName"></i></span>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-text" style="width:140px;">Email</span>
+                        <input type="email" name="txtEmail" class="form-control" required value={{user.email}}>
+                    </div>
+                    <div class="input-group mb-3 ">
+
+                    </div>
+
+                    <div class="input-group ">
+                        <span class="input-group-text" style="width:140px;">Username</i></span>
+                        <input type="text" name="txtUser" id="txtUser" class="form-control" required value={{user.username}}>
+                    </div>
+
+                    <div class="input-group mb-3 ">
+                        <span class="text" style="color:red ;margin-left:140px;font-weight:12px;" id="errorUser"></i></span>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-text" style="width:140px;">Is admin</span>
+                        <input type="text" name="txtIs_admin" id="txtIs_admin" class="form-control" required value={{user.is_admin}}>
+                    </div>
+
+                    <div class="input-group mb-3 ">
+                        <span class="text" style="color:red ;margin-left:140px;font-weight:12px;" id="errorIs_admin"></i></span>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-text" style="width:140px;">Password</span>
+                        <input type="password" name="txtPass" id="password1" class="form-control" required value={{user.password}}>
+                    </div>
+
+                    <div class="input-group mb-3 ">
+                        <span class="text" style="color:red ;margin-left:140px;font-weight:12px;" id="errorPass"></i></span>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-text" style="width:140px;">Reset password</span>
+                        <input type="password" name="txtResetPass" id="password2" class="form-control" required value={{user.password}}>
+                        <span class="input-group-text" onclick="showPassword()"><i class="fas fa-eye"></i></span>
+                    </div>
+
+                    <div class="input-group mb-3 ">
+                        <span class="text" style="color:red ;margin-left:140px;font-weight:12px;" id="errorPasse"></i></span>
+                    </div>
+
+                    <div class="form-group  float-end ">
+                        <input type="submit" id="signbtn" name="signbtn" value="Lưu lại" class="btn btn-success">
+                        <a href="./index.php?controller=user&action=list" class="btn btn-warning ">Quay lại</a>
+                    </div>
+                    {% endfor  %}
+                </form>
+			</div>
+		</div>
+         <script>
+        var elementN = document.getElementById("errorName");
+        var elementP = document.getElementById("errorPass");
+        var elementPe = document.getElementById("errorPasse");
+        var elementU = document.getElementById("errorUser");
+        var elementIs = document.getElementById("errorIs_admin");
+        var input = document.getElementById("signbtn");
+        var regex = /[\u00C0-\u024F\u1EA0-\u1EF9]+/g;
+        elementN.style.display = "none";
+        elementP.style.display = "none";
+        elementPe.style.display = "none";
+        elementU.style.display = "none";
+        elementIs.style.display = "none";
+        document.getElementById("txtUser").onchange = function() {
+            myFunction();
+        }
+        document.getElementById("txtName").onchange = function() {
+            myFunction();
+        }
+        document.getElementById("txtIs_admin").onchange = function() {
+            myFunction();
+        }
+        document.getElementById("password1").onchange = function() {
+            myFunction();
+        }
+        document.getElementById("password2").onchange = function() {
+            myFunction();
+        }
+
+
+
+        function myFunction() {
+            var user = document.getElementById("txtUser");
+            var name = document.getElementById("txtName");
+            var isadmin = document.getElementById("txtIs_admin");
+            var pass1 = document.getElementById("password1");
+            var pass2 = document.getElementById("password2");
+
+            if (user.value.length >= 20) {
+                elementU.innerHTML = "* User không quá 20 ký tự!";
+                elementU.style.display = "block";
+                input.setAttribute("disabled", true);
+            } else
+            if (regex.test(user.value)) {
+                elementU.innerHTML = "* User không chứa dấu!";
+                elementU.style.display = "block";
+                input.setAttribute("disabled", false);
+            } else if (name.value.length > 50) {
+                elementN.innerHTML = "* Name không quá 50 ký tự!";
+                elementN.style.display = "block";
+                input.setAttribute("disabled", true);
+            } else if (pass1.value.length >= 255) {
+                elementPe.innerHTML = "* Pass không quá 255 ký tự!";
+                elementPe.style.display = "block";
+                input.setAttribute("disabled", true);
+            // } else if (isadmin.value != 0 || isadmin.value != 1) {
+            //     elementIs.innerHTML = "* chỉ nhập 0 hoặc 1!";
+            //     elementIs.style.display = "block";
+            //     input.setAttribute("disabled", true);
+            } else
+            if (pass1.value != pass2.value) {
+                elementPe.innerHTML = "* Reset pass không đúng!";
+                elementPe.style.display = "block";
+                input.setAttribute("disabled", true);
+            } else {
+                elementU.style.display = "none";
+                elementN.style.display = "none";
+                elementIs.style.display = "none";
+                elementPe.style.display = "none";
+                input.removeAttribute("disabled");
+            }
+        }
+
+
+        function showPassword() {
+            var password1 = document.getElementById("password1");
+            var password2 = document.getElementById("password2");
+
+            if (password2.type === "password") {
+                password1.type = "text";
+                password2.type = "text";
+            } else {
+                password1.type = "password";
+                password2.type = "password";
+            }
+        }
+    </script>
+	{% endblock %}

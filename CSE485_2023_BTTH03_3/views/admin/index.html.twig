@@ -1,0 +1,63 @@
+
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block content %}
+        <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="card mb-2" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">
+                            <a href="" class="text-decoration-none">Người dùng</a>
+                        </h5>
+
+                        <h5 class="h1 text-center">
+                            {{users}}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="card mb-2" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">
+                            <a href="" class="text-decoration-none">Thể loại</a>
+                        </h5>
+
+                        <h5 class="h1 text-center">
+                         {{categorys}}
+                            
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="card mb-2" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">
+                            <a href="" class="text-decoration-none">Tác giả</a>
+                        </h5>
+                        <h5 class="h1 text-center">
+                        {{authors}}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="card mb-2" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">
+                            <a href="" class="text-decoration-none">Bài viết</a>
+                        </h5>
+
+                        <h5 class="h1 text-center">
+                        {{articles}}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

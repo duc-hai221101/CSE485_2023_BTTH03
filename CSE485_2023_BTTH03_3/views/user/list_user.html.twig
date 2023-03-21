@@ -1,0 +1,52 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block content %}
+	<!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
+	<div class="row">
+		<div class="col-sm">
+			<a href="index.php?controller=user&action=add" class="btn btn-success">Thêm mới</a>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Username</th>
+						<th scope="col">Password</th>
+						<th scope="col">Is admin</th>
+						<th>Sửa</th>
+						<th>Xóa</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% set count = 0 %}
+					{% for user in users %}
+						{% set count = count + 1 %}
+						<tr>
+							<th scope="row">
+								{{count}}
+							</th>
+							<td>
+								{{user.user}}
+							</td>
+							<td>
+								{{user.pass}}
+							</td>
+							<td>
+								{{user.is_admin}}
+							</td>
+							<td>
+								<a href="index.php?controller=user&action=edit&id={{user.id}}">
+									<i class="fa-solid fa-pen-to-square"></i>
+								</a>
+							</td>
+							<td>
+								<a onclick="return confirm('Ban co muon xoa khong');" href="/CSE485_2023_BTTH03/index.php?controller=user&action=delete&id={{user.id}}">
+									<i class="fa-solid fa-trash"></i>
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}
